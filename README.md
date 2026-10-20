@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/hero-3d.png">
-    <img src="assets/readme/hero-loop.webp" alt="Tarazu concept render: a laptop and a phone on a dark navy stage, both showing the Tarazu overview dashboard with separate Position, Money in and out, Betting performance and All-in net result panels. Labelled as a concept render with illustrative figures. Animated: slow camera drift, a light sweep across the screens, and the All-in bars building up." width="100%">
+    <img src="assets/readme/hero-loop.webp" alt="Tarazu concept render: a laptop and a phone on a dark navy stage, both showing the Tarazu overview dashboard with separate Position, Money in and out, Betting performance and All-in net result panels. Labelled as a concept render with illustrative figures. Animated: the laptop lid opens, the screen powers on, the dashboard panels and All-in bars build in, the phone slides in, and a light sweep passes across both." width="100%">
   </picture>
 </p>
 
@@ -152,9 +152,12 @@ These are also **out of scope for v1**: connecting to platforms or banks (no scr
 ## Dashboard concept
 
 <p align="center">
-  <img src="assets/readme/dashboard.png" alt="Concept mockup of the Tarazu overview screen for January 2026. Three separate panels: Position (equity ₹4,430.00, balance ₹3,730.00, at risk ₹700.00), Money in and out (deposited ₹2,000.00, withdrawn ₹3,000.00, net cash +₹975.00), and Betting performance (realised result +₹300.00, net betting result +₹250.00). Below them, an All-in net result of +₹405.00 with a waterfall of its six components. Figures are illustrative." width="100%">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/dashboard.png">
+    <img src="assets/readme/dashboard-demo.webp" alt="Animated concept mockup of the Tarazu overview screen for January 2026. Three separate panels: Position (equity ₹4,430.00, balance ₹3,730.00, at risk ₹700.00), Money in and out (deposited ₹2,000.00, withdrawn ₹3,000.00, net cash +₹975.00), and Betting performance (realised result +₹300.00, net betting result +₹250.00). Below them, an All-in net result of +₹405.00 with a waterfall of its six components. Figures are illustrative. In the animation, the panels build in, then a cursor turns on privacy mode and every amount becomes ₹ ••••, then turns it off." width="100%">
+  </picture>
 </p>
-<p align="center"><sub>Concept mockup. Not a screenshot. Figures are the January rows of the golden fixture (EX-01 to EX-10).</sub></p>
+<p align="center"><sub>Concept mockup with a privacy-mode demo. Not a screenshot. Figures are the January rows of the golden fixture (EX-01 to EX-10).</sub></p>
 
 The overview ([`05_UI_UX_SPEC.md` §5.2](05_UI_UX_SPEC.md#52-overview-dashboard--fr-007)) uses **three visually separate groups**. No figure is added across groups.
 
