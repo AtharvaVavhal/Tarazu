@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="assets/readme/hero-3d.png" alt="Tarazu concept render: a laptop and a phone on a dark navy stage, both showing the Tarazu overview dashboard with separate Position, Money in and out, Betting performance and All-in net result panels. Labelled as a concept render with illustrative figures." width="100%">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/hero-3d.png">
+    <img src="assets/readme/hero-loop.webp" alt="Tarazu concept render: a laptop and a phone on a dark navy stage, both showing the Tarazu overview dashboard with separate Position, Money in and out, Betting performance and All-in net result panels. Labelled as a concept render with illustrative figures. Animated: slow camera drift, a light sweep across the screens, and the All-in bars building up." width="100%">
+  </picture>
 </p>
 
 <h1 align="center">Tarazu</h1>
@@ -224,6 +227,14 @@ Realised betting results belong to the period of the bet's **`settled_at`**. A b
 ```
 equity = platform balance + open stake
 ```
+
+<p align="center">
+  <picture>
+    <source media="(prefers-reduced-motion: reduce)" srcset="assets/readme/attribution.png">
+    <img src="assets/readme/attribution.webp" alt="Animated concept diagram of settlement-date attribution. In January, bets B4 (Alpha, ₹400 stake) and B5 (Beta, ₹300 stake) sit in the At risk row, totalling ₹700.00 as of 31 January, while January's realised betting result is +₹300.00 from B1 and B2. The two bets then move into February's realised row: B5 settles on 1 February with a ₹900 payout (+₹600.00) and B4 settles on 3 February with no payout (−₹400.00), giving February +₹200.00 and ₹0.00 at risk." width="100%">
+  </picture>
+</p>
+<p align="center"><sub>Concept animation. Figures are EX-02 and EX-13 from the golden fixture.</sub></p>
 
 Deposits, withdrawals, fees, bonuses and adjustments are attributed by the entry's own `occurred_at`. Bets placed are counted by `placed_at`.
 
