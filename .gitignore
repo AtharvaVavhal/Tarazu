@@ -1,0 +1,19 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
+.DS_Store
+
+# Secrets and local environment (only .env.example is tracked)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Supabase local state
+supabase/.temp/
+supabase/.branches/
+supabase/.env
