@@ -5,8 +5,7 @@ import type { BetOutcome, BetResult, LedgerData } from './types';
 export function betResults(data: LedgerData): ReadonlyMap<string, BetResult> {
   const prep = prepare(data);
   const out = new Map<string, BetResult>();
-  for (const b of data.bets) {
-    const sums = prep.betSums.get(b.id) ?? { stake: 0n, payout: 0n, refund: 0n, commission: 0n };
+  for (const { bet: b, sums } of prep.betRows) {
     const net = sums.payout + sums.refund - sums.stake;
     let outcome: BetOutcome;
     let result: bigint | null;

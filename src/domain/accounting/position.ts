@@ -8,32 +8,27 @@ export function positionFromPrepared(
   t: number,
   platformIds: readonly string[],
 ): PositionSnapshot {
-  const included = new Set(platformIds);
-  const balance = new Map<string, bigint>();
-  const openStake = new Map<string, bigint>();
-  for (const id of platformIds) {
-    balance.set(id, 0n);
-    openStake.set(id, 0n);
-  }
+  const slots = new Map<string, { balance: bigint; openStake: bigint }>();
+  for (const id of platformIds) slots.set(id, { balance: 0n, openStake: 0n });
   for (const e of prep.data.entries) {
-    if (e.occurredAt <= t && included.has(e.platformId)) {
-      balance.set(e.platformId, (balance.get(e.platformId) ?? 0n) + platformDelta(e));
-    }
+    const slot = slots.get(e.platformId);
+    if (slot && e.occurredAt <= t) slot.balance += platformDelta(e);
   }
-  for (const b of prep.data.bets) {
-    if (!included.has(b.platformId) || !isOpenAt(b, t)) continue;
-    const stake = prep.betSums.get(b.id)?.stake ?? 0n;
-    openStake.set(b.platformId, (openStake.get(b.platformId) ?? 0n) + stake);
+  for (const { bet, sums } of prep.betRows) {
+    const slot = slots.get(bet.platformId);
+    if (slot && isOpenAt(bet, t)) slot.openStake += sums.stake;
   }
   const byPlatform: Record<string, PositionAmounts> = {};
   let totalBalance = 0n;
   let totalOpen = 0n;
-  for (const id of platformIds) {
-    const bal = balance.get(id) ?? 0n;
-    const open = openStake.get(id) ?? 0n;
-    byPlatform[id] = { balance: bal, openStake: open, equity: bal + open };
-    totalBalance += bal;
-    totalOpen += open;
+  for (const [id, slot] of slots) {
+    byPlatform[id] = {
+      balance: slot.balance,
+      openStake: slot.openStake,
+      equity: slot.balance + slot.openStake,
+    };
+    totalBalance += slot.balance;
+    totalOpen += slot.openStake;
   }
   return {
     at: t,

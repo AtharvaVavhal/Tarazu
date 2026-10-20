@@ -41,6 +41,8 @@ describe('time zones (02 §9, DEC-011)', () => {
     expect(() => startOfLocalDay('2026-02-30', IST)).toThrow();
     expect(() => startOfLocalDay('not-a-date', IST)).toThrow();
     expect(() => startOfLocalDay('2026-02-01', 'Mars/Phobos')).toThrow();
+    expect(() => dayWindow('2026-02-30', IST)).toThrow();
+    expect(() => dayWindow('2026-02-01', 'Mars/Phobos')).toThrow();
     expect(() => localDateOf(Number.NaN, IST)).toThrow();
     expect(() => localDateOf(0, 'Mars/Phobos')).toThrow();
   });

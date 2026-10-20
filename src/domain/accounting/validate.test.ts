@@ -203,4 +203,57 @@ describe('validateData — structural rules', () => {
     }
     expect(() => assertValidData(b.data())).not.toThrow();
   });
+
+  it('summarises long violation lists in the error message', () => {
+    const b = builder();
+    const e = b.deposit('A', 500n, 0n, 10);
+    const many = Array.from({ length: 7 }, (_, i) => ({ ...e, id: `bad${i}`, amount: 0n }));
+    try {
+      assertValidData({ ...b.data(), entries: many });
+      throw new Error('expected a throw');
+    } catch (err) {
+      expect((err as AccountingInputError).message).toContain('+2 more');
+      expect((err as AccountingInputError).violations).toHaveLength(7);
+    }
+  });
+
+  it('summarises long violation lists in the error message', () => {
+    const b = builder();
+    const e = b.deposit('A', 500n, 0n, 10);
+    const many = Array.from({ length: 7 }, (_, i) => ({ ...e, id: `bad${i}`, amount: 0n }));
+    try {
+      assertValidData({ ...b.data(), entries: many });
+      throw new Error('expected a throw');
+    } catch (err) {
+      expect((err as AccountingInputError).message).toContain('+2 more');
+      expect((err as AccountingInputError).violations).toHaveLength(7);
+    }
+  });
+
+  it('rejects unknown fee kinds, fractional bet timestamps, and checkpoints on unknown platforms', () => {
+    const b = builder();
+    b.platformFee('A', 10n, 5);
+    const data = b.data();
+    const fee = data.entries[0];
+    if (!fee) throw new Error('entry');
+    const badKind = validateData({
+      ...data,
+      entries: [{ ...fee, feeKind: 'TAX' as unknown as 'PLATFORM_FEE' }],
+    });
+    expect(badKind.map((x) => x.rule)).toContain('FEE_KIND');
+
+    const id = b.placeBet('A', 100n, 10);
+    const withBet = b.data();
+    const bet = withBet.bets.find((x) => x.id === id);
+    if (!bet) throw new Error('bet');
+    expect(
+      validateData({ ...withBet, bets: [{ ...bet, placedAt: 10.5 }] }).map((x) => x.rule),
+    ).toContain('BET_FIELDS');
+
+    const cp = validateData({
+      ...data,
+      checkpoints: [{ id: 'C', platformId: 'Z', asOf: 1, reported: 0n, ledger: 0n }],
+    });
+    expect(cp.map((x) => x.rule)).toContain('UNKNOWN_PLATFORM');
+  });
 });

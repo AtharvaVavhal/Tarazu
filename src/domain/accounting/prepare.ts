@@ -18,9 +18,9 @@ export interface Prepared {
   readonly data: LedgerData;
   readonly platformIds: readonly string[];
   readonly platformSet: ReadonlySet<string>;
-  readonly betsById: ReadonlyMap<string, Bet>;
   readonly entriesByBet: ReadonlyMap<string, readonly LedgerEntry[]>;
-  readonly betSums: ReadonlyMap<string, BetSums>;
+  /** Every bet with its ledger-derived sums, in input order. */
+  readonly betRows: readonly { readonly bet: Bet; readonly sums: BetSums }[];
 }
 
 const cache = new WeakMap<LedgerData, Prepared>();
@@ -36,7 +36,7 @@ export function prepare(data: LedgerData): Prepared {
     if (list) list.push(e);
     else entriesByBet.set(e.betId, [e]);
   }
-  const betSums = new Map<string, BetSums>();
+  const betRows: { bet: Bet; sums: BetSums }[] = [];
   for (const b of data.bets) {
     let stake = 0n;
     let payout = 0n;
@@ -49,15 +49,14 @@ export function prepare(data: LedgerData): Prepared {
       else if (e.type === 'BET_REFUND') refund += s;
       else if (e.feeKind === 'BET_COMMISSION') commission += e.type === 'FEE' ? s : -s;
     }
-    betSums.set(b.id, { stake, payout, refund, commission });
+    betRows.push({ bet: b, sums: { stake, payout, refund, commission } });
   }
   const prepared: Prepared = {
     data,
     platformIds: data.platforms.map((p) => p.id),
     platformSet: new Set(data.platforms.map((p) => p.id)),
-    betsById: new Map(data.bets.map((b) => [b.id, b])),
     entriesByBet,
-    betSums,
+    betRows,
   };
   cache.set(data, prepared);
   return prepared;

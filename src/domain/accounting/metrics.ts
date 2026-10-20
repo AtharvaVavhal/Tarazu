@@ -85,10 +85,8 @@ export function metricsFor(data: LedgerData, filter: MetricsFilter): Metrics {
   let losses = 0;
   let pushes = 0;
   const asOfEnd = to - 1;
-  for (const b of data.bets) {
+  for (const { bet: b, sums } of prep.betRows) {
     if (!included.has(b.platformId) || b.status === 'ANNULLED') continue;
-    const sums = prep.betSums.get(b.id);
-    if (!sums) continue;
     if (inWindow(b.placedAt)) betsPlaced += 1;
     if (isOpenAt(b, asOfEnd)) openCount += 1;
     if (b.settledAt === null || !inWindow(b.settledAt)) continue;

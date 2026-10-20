@@ -1,5 +1,6 @@
 // Test-only builder that produces *valid* ledgers by following the lifecycle rules of 02 §3, §4, §7
 // literally (reversal pairs, bet-dated entries). It is deliberately independent of the engine.
+import { MAX_AMOUNT_PAISE } from '@/domain/money';
 import type {
   Bet,
   Checkpoint,
@@ -261,11 +262,13 @@ export class LedgerBuilder {
     const id = this.nextId('C');
     this.checkpoints.push({ id, platformId: p, asOf, reported, ledger });
     const diff = reported - ledger;
+    const abs = diff > 0n ? diff : -diff;
     if (resolve && diff !== 0n) {
       this.add({
         platformId: p,
         type: diff > 0n ? 'ADJUSTMENT_CREDIT' : 'ADJUSTMENT_DEBIT',
-        amount: diff > 0n ? diff : -diff,
+        // a single entry is bounded (INV-ACC-01); a larger residual stays partly OPEN (02 §8: amount ≤ |residual|)
+        amount: abs > MAX_AMOUNT_PAISE ? MAX_AMOUNT_PAISE : abs,
         checkpointId: id,
         occurredAt: asOf,
         note: 'reconciliation difference',

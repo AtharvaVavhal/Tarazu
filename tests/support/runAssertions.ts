@@ -18,7 +18,11 @@ function get(obj: unknown, path: string): unknown {
   }
   return cur;
 }
-const str = (v: unknown): string => (typeof v === 'object' ? JSON.stringify(v) : String(v));
+const str = (v: unknown): string => {
+  if (typeof v === 'string') return v;
+  if (typeof v === 'number' || typeof v === 'bigint' || typeof v === 'boolean') return String(v);
+  return JSON.stringify(v);
+};
 const show = (v: unknown): string | null | undefined =>
   v === null ? null : v === undefined ? undefined : str(v);
 

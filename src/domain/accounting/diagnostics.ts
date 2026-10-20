@@ -5,6 +5,7 @@ import { prepare } from './prepare';
 import type { LedgerData, LedgerEntry, Violation } from './types';
 
 const FIVE_MINUTES = 5 * 60_000;
+const total = (es: readonly LedgerEntry[]) => es.reduce((sum, e) => sum + e.amount, 0n);
 
 const finding = (invariant: string, rule: string, entityId: string, detail: string): Violation => ({
   invariant,
@@ -93,7 +94,7 @@ export function diagnostics(data: LedgerData): Violation[] {
           stakes.length === 1 &&
           payouts.length === 0 &&
           refunds.length === 1 &&
-          refunds[0]?.amount === stakes[0]?.amount;
+          total(refunds) === total(stakes);
         break;
       case 'ANNULLED':
         consistent = live.length === 0;
@@ -169,25 +170,29 @@ export function diagnostics(data: LedgerData): Violation[] {
       .filter((e) => e.platformId === platformId)
       .sort((a, b) => a.occurredAt - b.occurredAt);
     let balance = 0n;
-    for (let i = 0; i < entries.length;) {
-      const at = entries[i]?.occurredAt ?? 0;
-      while (i < entries.length && entries[i]?.occurredAt === at) {
-        const e = entries[i];
-        if (e) balance += platformDelta(e);
-        i += 1;
-      }
-      if (balance < 0n) {
-        out.push(
-          finding(
-            'INV-ACC-14',
-            'NEGATIVE_BALANCE',
-            platformId,
-            `ledger implies ${balance} paise at ${at}; a record is probably missing`,
-          ),
-        );
+    let previousAt: number | null = null;
+    let reported = false;
+    const report = (at: number) => {
+      out.push(
+        finding(
+          'INV-ACC-14',
+          'NEGATIVE_BALANCE',
+          platformId,
+          `ledger implies ${balance} paise at ${at}; a record is probably missing`,
+        ),
+      );
+      reported = true;
+    };
+    for (const e of entries) {
+      // the balance at instant t includes every entry at t, so test it only once t has been fully applied
+      if (previousAt !== null && e.occurredAt !== previousAt && balance < 0n) {
+        report(previousAt);
         break;
       }
+      balance += platformDelta(e);
+      previousAt = e.occurredAt;
     }
+    if (!reported && previousAt !== null && balance < 0n) report(previousAt);
   }
 
   return out.sort(

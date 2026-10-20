@@ -40,9 +40,7 @@ export function lifetimeWindow(to: Instant): Window {
 
 /** Local calendar date ('YYYY-MM-DD') of an instant in the given IANA zone. */
 export function localDateOf(instant: Instant, zone: string): string {
-  const iso = zoned(instant, zone).toISODate();
-  if (iso === null) throw new RangeError('Instant out of range');
-  return iso;
+  return zoned(instant, zone).toFormat('yyyy-MM-dd');
 }
 
 /** Instant of local midnight at the start of a calendar date ('YYYY-MM-DD') in the zone. */

@@ -46,12 +46,12 @@ export function parseRupees(input: string, options: MoneyParseOptions = {}): Mon
     text = text.slice(1);
   }
 
-  const [integerPart, fractionPart, ...rest] = text.split('.');
-  if (rest.length > 0 || integerPart === undefined || !INTEGER_PART.test(integerPart)) {
-    return { ok: false, code: 'INVALID_FORMAT' };
-  }
+  const dot = text.indexOf('.');
+  const integerPart = dot < 0 ? text : text.slice(0, dot);
+  const fractionPart = dot < 0 ? undefined : text.slice(dot + 1);
+  if (!INTEGER_PART.test(integerPart)) return { ok: false, code: 'INVALID_FORMAT' };
   if (fractionPart !== undefined && !FRACTION_PART.test(fractionPart)) {
-    return { ok: false, code: 'INVALID_FORMAT' };
+    return { ok: false, code: 'INVALID_FORMAT' }; // also rejects a second '.'
   }
   if (negative) return { ok: false, code: 'NEGATIVE' };
   if (fractionPart !== undefined && fractionPart.length > 2) {
