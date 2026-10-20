@@ -1,4 +1,36 @@
 {
   "_comment": "IDs required to have a non-todo test once a milestone is complete (07 §6). Mirrors 08.",
-  "completed": {}
+  "completed": {
+    "M1": [
+      "INV-ACC-01",
+      "INV-ACC-02",
+      "INV-ACC-03",
+      "INV-ACC-04",
+      "INV-ACC-05",
+      "INV-ACC-06",
+      "INV-ACC-08",
+      "INV-ACC-09",
+      "INV-ACC-11",
+      "INV-ACC-12",
+      "INV-ACC-14",
+      "INV-ACC-15",
+      "EX-01",
+      "EX-02",
+      "EX-03",
+      "EX-04",
+      "EX-05",
+      "EX-06",
+      "EX-07",
+      "EX-08",
+      "EX-09",
+      "EX-10",
+      "EX-11",
+      "EX-12",
+      "EX-13",
+      "EX-14",
+      "EX-15",
+      "EX-16",
+      "AC-LEDG-05"
+    ]
+  }
 }

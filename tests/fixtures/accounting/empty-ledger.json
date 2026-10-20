@@ -1,0 +1,47 @@
+{
+  "_comment": "Derivation: nothing recorded. Every sum is 0; every ratio is null (zero denominator); counts 0; no diagnostics (P-3: callers must render null as an em dash, not zero).",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [],
+  "bets": [],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00.000+05:30",
+      "to": "2026-02-01T00:00:00.000+05:30",
+      "expect": {
+        "external.deposited": "0",
+        "external.withdrawn": "0",
+        "external.netDeposited": "0",
+        "external.frictionFees": "0",
+        "external.netCash": "0",
+        "neutral.openings": "0",
+        "neutral.transfersNet": "0",
+        "betting.grossBettingResult": "0",
+        "betting.turnover": "0",
+        "betting.betsPlaced": "0",
+        "betting.settledCount": "0",
+        "betting.openCount": "0",
+        "betting.hitRateBps": null,
+        "betting.yieldBps": null,
+        "betting.avgStake": null,
+        "costs.platformFees": "0",
+        "costs.bonusesNet": "0",
+        "costs.adjustmentsNet": "0",
+        "position.end.total.balance": "0",
+        "position.end.total.equity": "0",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

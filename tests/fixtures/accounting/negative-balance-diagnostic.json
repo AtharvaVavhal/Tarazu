@@ -1,0 +1,44 @@
+{
+  "_comment": "Derivation: deposit 10000 on 01-01 then withdrawal 15000 on 01-02 => balance -5000 from 01-02 (INV-ACC-14). Allowed, not rejected; surfaced as the NEGATIVE_BALANCE diagnostic. netDeposited = 10000-15000 = -5000. netCash = (W-Fw)-(D+Fd) = 15000-10000 = +5000 (bank received more than it paid). Metrics still computed exactly.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E1",
+      "occurredAt": "2026-01-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "10000"
+    },
+    {
+      "id": "E2",
+      "occurredAt": "2026-01-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "WITHDRAWAL",
+      "amount": "15000"
+    }
+  ],
+  "bets": [],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00.000+05:30",
+      "to": "2026-02-01T00:00:00.000+05:30",
+      "expect": {
+        "position.end.total.balance": "-5000",
+        "external.netDeposited": "-5000",
+        "external.netCash": "5000"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": ["NEGATIVE_BALANCE"]
+      }
+    }
+  ]
+}

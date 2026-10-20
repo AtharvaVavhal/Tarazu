@@ -1,0 +1,133 @@
+{
+  "_comment": "Derivation: opening 100000. Bonus +50000 then forfeit -20000 => bonusesNet 30000. Platform fee 3000, refund 1000 => platformFees 2000. Bet K stake 10000 lost (no payout entry): G=-10000. Commission 500, commission refund 200 => betCommissions 300; netBettingResult = -10000-300 = -10300. allIn = -10000 -300 -2000 +30000 -0 -0 = 17700. Balance = 100000+50000-20000-3000+1000-10000-500+200 = 117700 = O 100000 + allIn 17700.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E0",
+      "occurredAt": "2026-05-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "100000"
+    },
+    {
+      "id": "E1",
+      "occurredAt": "2026-05-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BONUS_CREDIT",
+      "amount": "50000"
+    },
+    {
+      "id": "E2",
+      "occurredAt": "2026-05-03T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BONUS_FORFEIT",
+      "amount": "20000"
+    },
+    {
+      "id": "E3",
+      "occurredAt": "2026-05-04T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "FEE",
+      "amount": "3000",
+      "feeKind": "PLATFORM_FEE"
+    },
+    {
+      "id": "E4",
+      "occurredAt": "2026-05-05T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "FEE_REFUND",
+      "amount": "1000",
+      "feeKind": "PLATFORM_FEE"
+    },
+    {
+      "id": "E5",
+      "occurredAt": "2026-05-06T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "K"
+    },
+    {
+      "id": "E6",
+      "occurredAt": "2026-05-06T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "FEE",
+      "amount": "500",
+      "bet": "K",
+      "feeKind": "BET_COMMISSION"
+    },
+    {
+      "id": "E7",
+      "occurredAt": "2026-05-07T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "FEE_REFUND",
+      "amount": "200",
+      "bet": "K",
+      "feeKind": "BET_COMMISSION"
+    }
+  ],
+  "bets": [
+    {
+      "id": "K",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-05-06T12:00:00.000+05:30",
+      "settledAt": "2026-05-06T12:00:00.000+05:30"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-05-01T00:00:00.000+05:30",
+      "to": "2026-06-01T00:00:00.000+05:30",
+      "expect": {
+        "costs.bonusesNet": "30000",
+        "costs.platformFees": "2000",
+        "betting.betCommissions": "300",
+        "betting.grossBettingResult": "-10000",
+        "betting.netBettingResult": "-10300",
+        "allIn.total": "17700",
+        "position.end.total.balance": "117700"
+      }
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-05-01T00:00:00.000+05:30",
+      "to": "2026-06-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "117700",
+        "components": {
+          "O": "100000",
+          "DminusW": "0",
+          "T": "0",
+          "G": "-10000",
+          "Cb": "-300",
+          "Cp": "-2000",
+          "Bn": "30000",
+          "A": "0"
+        }
+      }
+    },
+    {
+      "kind": "betResult",
+      "bet": "K",
+      "expect": {
+        "commission": "300",
+        "result": "-10000",
+        "outcome": "LOSS"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,485 @@
+{
+  "_comment": "Machine-readable copy of 02 §12 (the human authority). Amounts are decimal-string paise. The spec gives only local dates (IST); each entry is placed at 12:00 IST on its date, except E15 which is dated at the checkpoint as_of (end of 01-25 IST, 02 §8) and the 'JAN_END' position instant (last millisecond of 01-31 IST). Windows are [from,to) in IST; 'MIN' = lifetime start. Expected values are transcribed from 02 §12.3 and drift-checked against the markdown by src/domain/accounting/example01.test.ts. Assertions flagged \"derived\" restate spec values via simple arithmetic on spec rows (e.g. absolute balances implied by a stated delta) and are exempt from the markdown drift check.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    },
+    {
+      "id": "B",
+      "name": "Beta"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E01",
+      "occurredAt": "2026-01-01T12:00:00+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "500000"
+    },
+    {
+      "id": "E02",
+      "occurredAt": "2026-01-02T12:00:00+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "200000",
+      "fee": "1000"
+    },
+    {
+      "id": "E03",
+      "occurredAt": "2026-01-03T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "100000",
+      "bet": "B1"
+    },
+    {
+      "id": "E04",
+      "occurredAt": "2026-01-03T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "180000",
+      "bet": "B1"
+    },
+    {
+      "id": "E05",
+      "occurredAt": "2026-01-03T12:00:00+05:30",
+      "platform": "A",
+      "type": "FEE",
+      "amount": "5000",
+      "bet": "B1",
+      "feeKind": "BET_COMMISSION"
+    },
+    {
+      "id": "E06",
+      "occurredAt": "2026-01-04T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "50000",
+      "bet": "B2"
+    },
+    {
+      "id": "E07",
+      "occurredAt": "2026-01-05T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "70000",
+      "bet": "B3"
+    },
+    {
+      "id": "E08",
+      "occurredAt": "2026-01-05T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_REFUND",
+      "amount": "70000",
+      "bet": "B3"
+    },
+    {
+      "id": "E09",
+      "occurredAt": "2026-01-06T12:00:00+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "40000",
+      "bet": "B4"
+    },
+    {
+      "id": "E10",
+      "occurredAt": "2026-01-07T12:00:00+05:30",
+      "platform": "A",
+      "type": "BONUS_CREDIT",
+      "amount": "30000"
+    },
+    {
+      "id": "E11",
+      "occurredAt": "2026-01-10T12:00:00+05:30",
+      "platform": "A",
+      "type": "FEE",
+      "amount": "10000",
+      "feeKind": "PLATFORM_FEE"
+    },
+    {
+      "id": "E12",
+      "occurredAt": "2026-01-20T12:00:00+05:30",
+      "platform": "A",
+      "type": "WITHDRAWAL",
+      "amount": "300000",
+      "fee": "1500"
+    },
+    {
+      "id": "E13",
+      "occurredAt": "2026-01-22T12:00:00+05:30",
+      "platform": "A",
+      "type": "TRANSFER_OUT",
+      "amount": "50000",
+      "transferGroup": "T1"
+    },
+    {
+      "id": "E14",
+      "occurredAt": "2026-01-22T12:00:00+05:30",
+      "platform": "B",
+      "type": "TRANSFER_IN",
+      "amount": "50000",
+      "transferGroup": "T1"
+    },
+    {
+      "id": "E15",
+      "occurredAt": "2026-01-25T23:59:59.999+05:30",
+      "platform": "A",
+      "type": "ADJUSTMENT_DEBIT",
+      "amount": "2000",
+      "checkpoint": "C1",
+      "note": "Reconciliation difference, cause unknown"
+    },
+    {
+      "id": "E16",
+      "occurredAt": "2026-01-30T12:00:00+05:30",
+      "platform": "B",
+      "type": "BET_STAKE",
+      "amount": "30000",
+      "bet": "B5"
+    },
+    {
+      "id": "E17",
+      "occurredAt": "2026-02-01T12:00:00+05:30",
+      "platform": "B",
+      "type": "BET_PAYOUT",
+      "amount": "90000",
+      "bet": "B5"
+    }
+  ],
+  "bets": [
+    {
+      "id": "B1",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-01-03T12:00:00+05:30",
+      "settledAt": "2026-01-03T12:00:00+05:30"
+    },
+    {
+      "id": "B2",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-01-04T12:00:00+05:30",
+      "settledAt": "2026-01-04T12:00:00+05:30"
+    },
+    {
+      "id": "B3",
+      "platform": "A",
+      "status": "VOID",
+      "placedAt": "2026-01-05T12:00:00+05:30",
+      "settledAt": "2026-01-05T12:00:00+05:30"
+    },
+    {
+      "id": "B4",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-01-06T12:00:00+05:30",
+      "settledAt": "2026-02-03T12:00:00+05:30"
+    },
+    {
+      "id": "B5",
+      "platform": "B",
+      "status": "SETTLED",
+      "placedAt": "2026-01-30T12:00:00+05:30",
+      "settledAt": "2026-02-01T12:00:00+05:30"
+    }
+  ],
+  "checkpoints": [
+    {
+      "id": "C1",
+      "platform": "A",
+      "asOf": "2026-01-25T23:59:59.999+05:30",
+      "reported": "353000",
+      "ledger": "355000"
+    }
+  ],
+  "variants": {
+    "correction": {
+      "_comment": "EX-16: B1 payout corrected 1,800 -> 1,900. X1 reverses E04 (inherits its occurredAt, DEC-013); X2 is the replacement payout.",
+      "add": [
+        {
+          "id": "X1",
+          "occurredAt": "2026-01-03T12:00:00+05:30",
+          "platform": "A",
+          "type": "BET_PAYOUT",
+          "amount": "180000",
+          "bet": "B1",
+          "reverses": "E04",
+          "recordedAt": "2026-01-04T09:00:00+05:30"
+        },
+        {
+          "id": "X2",
+          "occurredAt": "2026-01-03T12:00:00+05:30",
+          "platform": "A",
+          "type": "BET_PAYOUT",
+          "amount": "190000",
+          "bet": "B1",
+          "recordedAt": "2026-01-04T09:00:00+05:30"
+        }
+      ]
+    }
+  },
+  "assertions": [
+    {
+      "ex": "EX-01",
+      "kind": "position",
+      "at": "2026-01-31T23:59:59.999+05:30",
+      "expect": {
+        "byPlatform.A.balance": "353000",
+        "byPlatform.B.balance": "20000"
+      }
+    },
+    {
+      "ex": "EX-02",
+      "kind": "position",
+      "at": "2026-01-31T23:59:59.999+05:30",
+      "expect": {
+        "byPlatform.A.openStake": "40000",
+        "byPlatform.B.openStake": "30000"
+      }
+    },
+    {
+      "ex": "EX-03",
+      "kind": "position",
+      "at": "2026-01-31T23:59:59.999+05:30",
+      "expect": {
+        "total.equity": "443000"
+      }
+    },
+    {
+      "ex": "EX-04",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "external.deposited": "200000",
+        "external.withdrawn": "300000",
+        "external.netDeposited": "-100000",
+        "external.frictionFeesOnDeposits": "1000",
+        "external.frictionFeesOnWithdrawals": "1500"
+      }
+    },
+    {
+      "ex": "EX-05",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "external.netCash": "97500"
+      }
+    },
+    {
+      "ex": "EX-06",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "betting.grossBettingResult": "30000",
+        "betting.betCommissions": "5000",
+        "betting.netBettingResult": "25000"
+      }
+    },
+    {
+      "ex": "EX-07",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "costs.platformFees": "10000",
+        "costs.bonusesNet": "30000",
+        "costs.adjustmentsNet": "-2000"
+      }
+    },
+    {
+      "ex": "EX-08",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "allIn.total": "40500"
+      }
+    },
+    {
+      "ex": "EX-09",
+      "kind": "identity",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "deltaEquity": "443000",
+        "components": {
+          "O": "500000",
+          "DminusW": "-100000",
+          "T": "0",
+          "G": "30000",
+          "Cb": "-5000",
+          "Cp": "-10000",
+          "Bn": "30000",
+          "A": "-2000"
+        }
+      }
+    },
+    {
+      "ex": "EX-10",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "betting.turnover": "150000",
+        "betting.yieldBps": "1667",
+        "betting.settledCount": "2",
+        "betting.wins": "1",
+        "betting.losses": "1",
+        "betting.voidCount": "1",
+        "betting.betsPlaced": "5",
+        "betting.openCount": "2"
+      }
+    },
+    {
+      "ex": "EX-11",
+      "kind": "identity",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "deltaEquity": "393000",
+        "components": {
+          "O": "500000",
+          "DminusW": "-100000",
+          "T": "-50000",
+          "G": "30000",
+          "Cb": "-5000",
+          "Cp": "-10000",
+          "Bn": "30000",
+          "A": "-2000"
+        }
+      },
+      "platforms": ["A"]
+    },
+    {
+      "ex": "EX-12",
+      "kind": "identity",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "deltaEquity": "50000",
+        "components": {
+          "O": "0",
+          "DminusW": "0",
+          "T": "50000",
+          "G": "0",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      },
+      "platforms": ["B"]
+    },
+    {
+      "ex": "EX-13",
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00+05:30",
+      "to": "2026-03-01T00:00:00+05:30",
+      "expect": {
+        "betting.grossBettingResult": "20000",
+        "allIn.total": "20000"
+      }
+    },
+    {
+      "ex": "EX-13",
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00+05:30",
+      "to": "2026-03-01T00:00:00+05:30",
+      "derived": true,
+      "expect": {
+        "position.start.byPlatform.A.balance": "353000",
+        "position.end.byPlatform.A.balance": "353000",
+        "position.start.byPlatform.B.balance": "20000",
+        "position.end.byPlatform.B.balance": "110000",
+        "position.start.total.openStake": "70000",
+        "position.end.total.openStake": "0"
+      }
+    },
+    {
+      "ex": "EX-13",
+      "kind": "identity",
+      "from": "2026-02-01T00:00:00+05:30",
+      "to": "2026-03-01T00:00:00+05:30",
+      "expect": {
+        "deltaEquity": "20000",
+        "components": {
+          "O": "0",
+          "DminusW": "0",
+          "T": "0",
+          "G": "20000",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      }
+    },
+    {
+      "ex": "EX-14",
+      "kind": "identityAllIn",
+      "from": "MIN",
+      "to": "2026-03-01T00:00:00+05:30",
+      "expect": {
+        "allIn": "60500",
+        "netCash": "97500",
+        "equityEnd": "463000",
+        "openings": "500000",
+        "equityMinusOpenings": "-37000"
+      }
+    },
+    {
+      "ex": "EX-15",
+      "kind": "checkpoint",
+      "checkpoint": "C1",
+      "expect": {
+        "difference": "-2000",
+        "state": "RESOLVED",
+        "residual": "0"
+      }
+    },
+    {
+      "ex": "EX-15",
+      "kind": "checkpoint",
+      "checkpoint": "C1",
+      "derived": true,
+      "expect": {
+        "recomputedLedger": "355000"
+      }
+    },
+    {
+      "ex": "EX-16",
+      "kind": "betResult",
+      "variant": "correction",
+      "bet": "B1",
+      "expect": {
+        "payout": "190000"
+      }
+    },
+    {
+      "ex": "EX-16",
+      "kind": "position",
+      "variant": "correction",
+      "at": "2026-01-31T23:59:59.999+05:30",
+      "expect": {
+        "byPlatform.A.balance": "363000"
+      },
+      "derived": true
+    },
+    {
+      "ex": "EX-16",
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00+05:30",
+      "to": "2026-02-01T00:00:00+05:30",
+      "expect": {
+        "betting.grossBettingResult": "40000",
+        "allIn.total": "50500"
+      },
+      "variant": "correction"
+    }
+  ]
+}

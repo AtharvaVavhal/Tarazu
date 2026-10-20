@@ -1,0 +1,261 @@
+{
+  "_comment": "Hand-derived from 02 \u00a73 (platform_delta = sgn*(+-amount); bank_delta per table). Shared by the Vitest contribution test and, from M2, the pgTAP generated-column test (INV-DB-05).",
+  "rows": [
+    {
+      "entryType": "OPENING_BALANCE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "OPENING_BALANCE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "DEPOSIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "-100000"
+    },
+    {
+      "entryType": "DEPOSIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "100000"
+    },
+    {
+      "entryType": "DEPOSIT",
+      "amount": "100000",
+      "fee": "3000",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "-103000"
+    },
+    {
+      "entryType": "DEPOSIT",
+      "amount": "100000",
+      "fee": "3000",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "103000"
+    },
+    {
+      "entryType": "WITHDRAWAL",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "100000"
+    },
+    {
+      "entryType": "WITHDRAWAL",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "-100000"
+    },
+    {
+      "entryType": "WITHDRAWAL",
+      "amount": "100000",
+      "fee": "3000",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "97000"
+    },
+    {
+      "entryType": "WITHDRAWAL",
+      "amount": "100000",
+      "fee": "3000",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "-97000"
+    },
+    {
+      "entryType": "TRANSFER_OUT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "TRANSFER_OUT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "TRANSFER_IN",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "TRANSFER_IN",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_STAKE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_STAKE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_PAYOUT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_PAYOUT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_REFUND",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BET_REFUND",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "FEE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "FEE",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "FEE_REFUND",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "FEE_REFUND",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BONUS_CREDIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BONUS_CREDIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BONUS_FORFEIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "BONUS_FORFEIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "ADJUSTMENT_CREDIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "ADJUSTMENT_CREDIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "ADJUSTMENT_DEBIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": false,
+      "platformDelta": "-100000",
+      "bankDelta": "0"
+    },
+    {
+      "entryType": "ADJUSTMENT_DEBIT",
+      "amount": "100000",
+      "fee": "0",
+      "isReversal": true,
+      "platformDelta": "100000",
+      "bankDelta": "0"
+    }
+  ]
+}

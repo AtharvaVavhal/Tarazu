@@ -1,0 +1,74 @@
+{
+  "_comment": "Derivation: R1 +100000 deposit, R2 reverses it (net 0), R3 replacement +120000 => deposited 120000. R4 deposit 50000 fee 500, R5 reverses it => its amount and fee cancel. netCash = (-100000+100000) + (-120000) + (-50500+50500) = -120000. Balance = 120000.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "R1",
+      "occurredAt": "2026-02-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "100000"
+    },
+    {
+      "id": "R2",
+      "occurredAt": "2026-02-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "100000",
+      "reverses": "R1"
+    },
+    {
+      "id": "R3",
+      "occurredAt": "2026-02-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "120000"
+    },
+    {
+      "id": "R4",
+      "occurredAt": "2026-02-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "50000",
+      "fee": "500"
+    },
+    {
+      "id": "R5",
+      "occurredAt": "2026-02-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "50000",
+      "fee": "500",
+      "reverses": "R4"
+    }
+  ],
+  "bets": [],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "external.deposited": "120000",
+        "external.withdrawn": "0",
+        "external.netDeposited": "120000",
+        "external.frictionFeesOnDeposits": "0",
+        "external.frictionFees": "0",
+        "external.netCash": "-120000",
+        "position.end.total.balance": "120000",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

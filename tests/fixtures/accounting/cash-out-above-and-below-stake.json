@@ -1,0 +1,141 @@
+{
+  "_comment": "Derivation: opening 100000. Three settled bets, each stake 10000: C1 cash-out 4000 (r=-6000 LOSS), C2 payout 16000 (r=+6000 WIN), C3 payout 10000 (r=0 PUSH). G = -6000+6000+0 = 0; turnover 30000; wins 1, losses 1, pushes 1; hitRate = 1/(1+1) = 5000 bps (push excluded); yield = 0*10000/30000 = 0 bps; avgStake = 30000/3 = 10000; balance = 100000-30000+30000 = 100000.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E0",
+      "occurredAt": "2026-03-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "100000"
+    },
+    {
+      "id": "S1",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "C1"
+    },
+    {
+      "id": "P1",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "4000",
+      "bet": "C1"
+    },
+    {
+      "id": "S2",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "C2"
+    },
+    {
+      "id": "P2",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "16000",
+      "bet": "C2"
+    },
+    {
+      "id": "S3",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "C3"
+    },
+    {
+      "id": "P3",
+      "occurredAt": "2026-03-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "10000",
+      "bet": "C3"
+    }
+  ],
+  "bets": [
+    {
+      "id": "C1",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-03-02T12:00:00.000+05:30",
+      "settledAt": "2026-03-02T12:00:00.000+05:30"
+    },
+    {
+      "id": "C2",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-03-02T12:00:00.000+05:30",
+      "settledAt": "2026-03-02T12:00:00.000+05:30"
+    },
+    {
+      "id": "C3",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-03-02T12:00:00.000+05:30",
+      "settledAt": "2026-03-02T12:00:00.000+05:30"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-03-01T00:00:00.000+05:30",
+      "to": "2026-04-01T00:00:00.000+05:30",
+      "expect": {
+        "betting.grossBettingResult": "0",
+        "betting.turnover": "30000",
+        "betting.settledCount": "3",
+        "betting.wins": "1",
+        "betting.losses": "1",
+        "betting.pushes": "1",
+        "betting.hitRateBps": "5000",
+        "betting.yieldBps": "0",
+        "betting.avgStake": "10000",
+        "position.end.total.balance": "100000",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "betResult",
+      "bet": "C1",
+      "expect": {
+        "result": "-6000",
+        "outcome": "LOSS",
+        "payout": "4000",
+        "stake": "10000"
+      }
+    },
+    {
+      "kind": "betResult",
+      "bet": "C2",
+      "expect": {
+        "result": "6000",
+        "outcome": "WIN"
+      }
+    },
+    {
+      "kind": "betResult",
+      "bet": "C3",
+      "expect": {
+        "result": "0",
+        "outcome": "PUSH"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "_comment": "Derivation (all amounts at the 10^12 paise bound): opening 1e12; deposit 1e12 fee 1e12; withdrawal 1e12 fee 1e12 (fee == amount allowed); bet stake 1e12 payout 1e12. O=1e12, D=1e12, W=1e12, Fd=1e12, Fw=1e12 => netCash = (W-Fw)-(D+Fd) = -2e12. G = 1e12-1e12 = 0; allIn = 0 - (Fd+Fw) = -2e12. Balance = 1e12+1e12-1e12-1e12+1e12 = 1e12. Identity: allIn = netCash + dEquity - O - T = -2e12 + 1e12 - 1e12 - 0.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E0",
+      "occurredAt": "2026-06-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "1000000000000"
+    },
+    {
+      "id": "E1",
+      "occurredAt": "2026-06-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "DEPOSIT",
+      "amount": "1000000000000",
+      "fee": "1000000000000"
+    },
+    {
+      "id": "E2",
+      "occurredAt": "2026-06-03T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "WITHDRAWAL",
+      "amount": "1000000000000",
+      "fee": "1000000000000"
+    },
+    {
+      "id": "E3",
+      "occurredAt": "2026-06-04T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "1000000000000",
+      "bet": "M"
+    },
+    {
+      "id": "E4",
+      "occurredAt": "2026-06-04T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "1000000000000",
+      "bet": "M"
+    }
+  ],
+  "bets": [
+    {
+      "id": "M",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-06-04T12:00:00.000+05:30",
+      "settledAt": "2026-06-04T12:00:00.000+05:30"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-06-01T00:00:00.000+05:30",
+      "to": "2026-07-01T00:00:00.000+05:30",
+      "expect": {
+        "external.deposited": "1000000000000",
+        "external.withdrawn": "1000000000000",
+        "external.frictionFees": "2000000000000",
+        "external.netCash": "-2000000000000",
+        "betting.grossBettingResult": "0",
+        "allIn.total": "-2000000000000",
+        "position.end.total.balance": "1000000000000"
+      }
+    },
+    {
+      "kind": "identityAllIn",
+      "ex": "max",
+      "from": "2026-06-01T00:00:00.000+05:30",
+      "to": "2026-07-01T00:00:00.000+05:30",
+      "expect": {
+        "allIn": "-2000000000000",
+        "netCash": "-2000000000000",
+        "equityEnd": "1000000000000",
+        "openings": "1000000000000",
+        "equityMinusOpenings": "0"
+      }
+    }
+  ]
+}

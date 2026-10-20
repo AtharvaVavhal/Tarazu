@@ -1,0 +1,161 @@
+{
+  "_comment": "Derivation: A opening 100000. T1 moves 30000 A->B (OUT on A, IN on B); T2 moves 5000 B->A. All platforms: transfersNet = 0, balance 100000. A only: T = +5000 - 30000 = -25000, balance 100000-30000+5000 = 75000. B only: T = +25000, balance 25000. No deposits/withdrawals/performance, allIn 0 everywhere. Equity identity: A 75000 = O 100000 + T -25000; B 25000 = T +25000.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    },
+    {
+      "id": "B",
+      "name": "Beta"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E1",
+      "occurredAt": "2026-02-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "100000"
+    },
+    {
+      "id": "E2",
+      "occurredAt": "2026-02-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "TRANSFER_OUT",
+      "amount": "30000",
+      "transferGroup": "T1"
+    },
+    {
+      "id": "E3",
+      "occurredAt": "2026-02-02T12:00:00.000+05:30",
+      "platform": "B",
+      "type": "TRANSFER_IN",
+      "amount": "30000",
+      "transferGroup": "T1"
+    },
+    {
+      "id": "E4",
+      "occurredAt": "2026-02-03T12:00:00.000+05:30",
+      "platform": "B",
+      "type": "TRANSFER_OUT",
+      "amount": "5000",
+      "transferGroup": "T2"
+    },
+    {
+      "id": "E5",
+      "occurredAt": "2026-02-03T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "TRANSFER_IN",
+      "amount": "5000",
+      "transferGroup": "T2"
+    }
+  ],
+  "bets": [],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "neutral.transfersNet": "0",
+        "external.deposited": "0",
+        "external.withdrawn": "0",
+        "position.end.total.balance": "100000",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "neutral.transfersNet": "-25000",
+        "external.deposited": "0",
+        "external.withdrawn": "0",
+        "position.end.total.balance": "75000",
+        "allIn.total": "0"
+      },
+      "platforms": ["A"]
+    },
+    {
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "neutral.transfersNet": "25000",
+        "external.deposited": "0",
+        "external.withdrawn": "0",
+        "position.end.total.balance": "25000",
+        "allIn.total": "0",
+        "neutral.openings": "0"
+      },
+      "platforms": ["B"]
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "100000",
+        "components": {
+          "O": "100000",
+          "DminusW": "0",
+          "T": "0",
+          "G": "0",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      }
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "75000",
+        "components": {
+          "O": "100000",
+          "DminusW": "0",
+          "T": "-25000",
+          "G": "0",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      },
+      "platforms": ["A"]
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "25000",
+        "components": {
+          "O": "0",
+          "DminusW": "0",
+          "T": "25000",
+          "G": "0",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      },
+      "platforms": ["B"]
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

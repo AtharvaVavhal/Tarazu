@@ -1,0 +1,127 @@
+{
+  "_comment": "Derivation: opening 500000 (01-01). Bet X: stake 10000 placed 01-31, payout 25000 settled 02-01. January: G=0 (not settled), 1 placed, 1 open at month end; balance 500000-10000=490000, openStake 10000, equity 500000. February: G = 25000-10000 = 15000, turnover 10000, 1 settled win; hit rate 1/1 = 10000 bps; yield 15000*10000/10000 = 15000 bps; avgStake 10000; balance 515000, openStake 0.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "E1",
+      "occurredAt": "2026-01-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "500000"
+    },
+    {
+      "id": "E2",
+      "occurredAt": "2026-01-31T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "X"
+    },
+    {
+      "id": "E3",
+      "occurredAt": "2026-02-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "25000",
+      "bet": "X"
+    }
+  ],
+  "bets": [
+    {
+      "id": "X",
+      "platform": "A",
+      "status": "SETTLED",
+      "placedAt": "2026-01-31T12:00:00.000+05:30",
+      "settledAt": "2026-02-01T12:00:00.000+05:30"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-01-01T00:00:00.000+05:30",
+      "to": "2026-02-01T00:00:00.000+05:30",
+      "expect": {
+        "betting.grossBettingResult": "0",
+        "betting.turnover": "0",
+        "betting.betsPlaced": "1",
+        "betting.settledCount": "0",
+        "betting.openCount": "1",
+        "betting.yieldBps": null,
+        "betting.hitRateBps": null,
+        "betting.avgStake": null,
+        "position.end.total.balance": "490000",
+        "position.end.total.openStake": "10000",
+        "position.end.total.equity": "500000",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "metrics",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "betting.grossBettingResult": "15000",
+        "betting.turnover": "10000",
+        "betting.betsPlaced": "0",
+        "betting.settledCount": "1",
+        "betting.wins": "1",
+        "betting.openCount": "0",
+        "betting.hitRateBps": "10000",
+        "betting.yieldBps": "15000",
+        "betting.avgStake": "10000",
+        "position.end.total.balance": "515000",
+        "position.end.total.openStake": "0",
+        "allIn.total": "15000"
+      }
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-01-01T00:00:00.000+05:30",
+      "to": "2026-02-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "500000",
+        "components": {
+          "O": "500000",
+          "DminusW": "0",
+          "T": "0",
+          "G": "0",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      }
+    },
+    {
+      "kind": "identity",
+      "ex": "identity",
+      "from": "2026-02-01T00:00:00.000+05:30",
+      "to": "2026-03-01T00:00:00.000+05:30",
+      "expect": {
+        "deltaEquity": "15000",
+        "components": {
+          "O": "0",
+          "DminusW": "0",
+          "T": "0",
+          "G": "15000",
+          "Cb": "0",
+          "Cp": "0",
+          "Bn": "0",
+          "A": "0"
+        }
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}

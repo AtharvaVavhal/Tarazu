@@ -1,0 +1,104 @@
+{
+  "_comment": "Derivation: opening 100000; stake 10000 on 04-02; first settled WIN payout 20000 on 04-03 (V2); corrected on 04-04 to VOID: V3 reverses V2 (inherits 04-03, DEC-013) and V4 refunds 10000 at 04-04. Final: bet VOID settled 04-04. April: G=0, turnover 0, settled 0, void 1, placed 1; balance 100000-10000+20000-20000+10000 = 100000. As of end 04-03 (restated history): payout and its reversal both dated 04-03 so balance 90000, bet still open (settledAt 04-04 later), openStake 10000, equity 100000.",
+  "platforms": [
+    {
+      "id": "A",
+      "name": "Alpha"
+    }
+  ],
+  "entries": [
+    {
+      "id": "V0",
+      "occurredAt": "2026-04-01T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "OPENING_BALANCE",
+      "amount": "100000"
+    },
+    {
+      "id": "V1",
+      "occurredAt": "2026-04-02T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_STAKE",
+      "amount": "10000",
+      "bet": "V"
+    },
+    {
+      "id": "V2",
+      "occurredAt": "2026-04-03T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "20000",
+      "bet": "V"
+    },
+    {
+      "id": "V3",
+      "occurredAt": "2026-04-03T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_PAYOUT",
+      "amount": "20000",
+      "bet": "V",
+      "reverses": "V2"
+    },
+    {
+      "id": "V4",
+      "occurredAt": "2026-04-04T12:00:00.000+05:30",
+      "platform": "A",
+      "type": "BET_REFUND",
+      "amount": "10000",
+      "bet": "V"
+    }
+  ],
+  "bets": [
+    {
+      "id": "V",
+      "platform": "A",
+      "status": "VOID",
+      "placedAt": "2026-04-02T12:00:00.000+05:30",
+      "settledAt": "2026-04-04T12:00:00.000+05:30"
+    }
+  ],
+  "assertions": [
+    {
+      "kind": "metrics",
+      "from": "2026-04-01T00:00:00.000+05:30",
+      "to": "2026-05-01T00:00:00.000+05:30",
+      "expect": {
+        "betting.grossBettingResult": "0",
+        "betting.turnover": "0",
+        "betting.settledCount": "0",
+        "betting.voidCount": "1",
+        "betting.betsPlaced": "1",
+        "betting.openCount": "0",
+        "position.end.total.balance": "100000",
+        "position.end.total.openStake": "0",
+        "allIn.total": "0"
+      }
+    },
+    {
+      "kind": "position",
+      "at": "2026-04-03T23:59:59.999+05:30",
+      "expect": {
+        "total.balance": "90000",
+        "total.openStake": "10000",
+        "total.equity": "100000"
+      }
+    },
+    {
+      "kind": "betResult",
+      "bet": "V",
+      "expect": {
+        "stake": "10000",
+        "payout": "0",
+        "refund": "10000",
+        "result": "0",
+        "outcome": "VOID"
+      }
+    },
+    {
+      "kind": "diagnostics",
+      "expect": {
+        "rules": []
+      }
+    }
+  ]
+}
